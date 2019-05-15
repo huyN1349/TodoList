@@ -1,6 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const request = require("request");
+//const request = require("request");
+//const ejsLint = require("ejs-lint");
+
+//ejsLint("list");
+var items = [];
 
 const app = express();
 app.use(bodyParser.urlencoded({
@@ -20,12 +24,15 @@ app.get("/", function(req, res) {
   var day = today.toLocaleDateString("en-us", options)
   //res.sendFile(__dirname + "/index.html");
   res.render("list", {
-    dayEJS: day
+    dayEJS: day,
+    itemsEJS: items,
   });
 })
 
 app.post("/", function(req, res) {
-  console.log(req.body.newItem);
+  items.push(req.body.newItem);
+  res.redirect("/");
+  //console.log(req.body.newItem);
 })
 
 app.listen(process.env.PORT || 3000, function() {

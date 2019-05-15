@@ -10,15 +10,20 @@
 
 <body>
   <h1><%= dayEJS %></h1>
-  <form action="/" method="post" class="input-group mb-3">
-    <input type="text" class="form-control" name="newItem" placeholder="Enter a todo task">
-    <button type="submit" class="btn btn-outline-secondary">Add</button>
-  </form>
+
   <ul>
     <li>Buy Food</li>
     <li>Cook Food</li>
     <li>Eat Food</li>
+    <% for (let i = 0; i < itemsEJS.length; i++) { %>
+      <li><%= itemsEJS[i] %></li>
+    <% } %>
   </ul>
+
+  <form action="/" method="post" class="input-group mb-3">
+    <input type="text" class="form-control" name="newItem" placeholder="Enter a todo task">
+    <button type="submit" class="btn btn-outline-secondary">Add Me</button>
+  </form>
 </body>
 
 </html>
