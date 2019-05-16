@@ -5,25 +5,30 @@
   <meta charset="utf-8">
   <title>Todo List</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
-  <h1><%= dayEJS %></h1>
+  <div class="box" id="heading">
+    <h1><%= dayEJS %></h1>
+  </div>
 
-  <ul>
-    <li>Buy Food</li>
-    <li>Cook Food</li>
-    <li>Eat Food</li>
+  <div class="box">
     <% for (let i = 0; i < itemsEJS.length; i++) { %>
-      <li><%= itemsEJS[i] %></li>
-    <% } %>
-  </ul>
+    <div class="item">
+      <input type="checkbox">
+      <p><%= itemsEJS[i] %></p>
+    </div>
 
-  <form action="/" method="post" class="input-group mb-3">
-    <input type="text" class="form-control" name="newItem" placeholder="Enter a todo task">
-    <button type="submit" class="btn btn-outline-secondary">Add Me</button>
-  </form>
+    <% } %>
+    <form action="/" method="post" class="item">
+      <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+      <button type="submit" name="button">+</button>
+    </form>
+  </div>
+
+
+
 </body>
 
 </html>

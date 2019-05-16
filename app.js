@@ -4,12 +4,14 @@ const bodyParser = require("body-parser");
 //const ejsLint = require("ejs-lint");
 
 //ejsLint("list");
-var items = [];
+var items = ["Buy Food", "Cook Food", "Eat Food"];
 
 const app = express();
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
+app.use(express.static("public"));
 app.set("view engine", "ejs");
 
 app.get("/", function(req, res) {
