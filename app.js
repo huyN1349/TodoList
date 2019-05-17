@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 
 //ejsLint("list");
 var items = ["Buy Food", "Cook Food", "Eat Food"];
+var workItems = [];
 
 const app = express();
 app.use(bodyParser.urlencoded({
@@ -14,27 +15,52 @@ app.use(bodyParser.urlencoded({
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
+//------Index Page-----//
 app.get("/", function(req, res) {
   var today = new Date();
-  //var currentDay = today.getDay();
   var options = {
     weekday: "long",
     day: "numeric",
     month: "long",
   }
-
   var day = today.toLocaleDateString("en-us", options)
-  //res.sendFile(__dirname + "/index.html");
+
   res.render("list", {
-    dayEJS: day,
+    listTitleEJS: day,
     itemsEJS: items,
   });
 })
 
 app.post("/", function(req, res) {
-  items.push(req.body.newItem);
+  if (req.body.list === "Work") {
+    workItems.push(req.body.newItem);
+    res.redirect("/work");
+  } else {
+    items.push(req.body.newItem);
+    res.redirect("/");
+  }
+
+  //console.log(req.body);
+
+})
+
+//------Work Page------//
+app.get("/work", function(req, res) {
+  res.render("list", {
+    listTitleEJS: "Work List",
+    itemsEJS: workItems,
+  })
+})
+
+app.post("/work", function(req, res) {
+  workItems.push(req.body.newItem);
+  console.log(req.body);
   res.redirect("/");
-  //console.log(req.body.newItem);
+})
+
+//-----About Page-----//
+app.get("/about", function(req,res) {
+  res.render("about");
 })
 
 app.listen(process.env.PORT || 3000, function() {
