@@ -8,8 +8,9 @@
   <div class="box">
     <% itemsEJS.forEach(function(itemEJS){ %>
 <form action="/delete" method="post">
-  <div class="item" name="list" value=<%= listTitleEJS%>>
+  <div class="item">
     <input type="checkbox" name="checkbox" value=<%= itemEJS._id%> onChange="this.form.submit()">
+    <input type="hidden" name="urlName" value="<%= listTitleEJS %>"></input>
     <p><%= itemEJS.name %></p>
   </div>
 </form>
